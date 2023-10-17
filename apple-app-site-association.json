@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": {
+      "com.vivekisukapalli.transactify": {
+        "paths": ["/plaid/*"]
+      }
+    }
+  }
+}
