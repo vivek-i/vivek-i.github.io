@@ -2,17 +2,16 @@
 import Head from "next/head";
 import styles from "./page.module.css";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
-import { useState, useEffect } from "react"; // Import hooks
+import { useState, useEffect } from "react";
 import AnimatedCursor from "react-animated-cursor";
 
 const iconStyle = {
   color: "rgba(255, 255, 255, 0.4)",
-  fontSize: "3.125rem", // 50px to rem
+  fontSize: "3.125rem", 
   marginTop: "15px",
   marginBottom: "15px",
 };
 
-// Function to detect if the device is an iPhone with Safari
 const isIphoneWithSafari = () => {
   const ua = navigator.userAgent;
   return (
@@ -32,14 +31,10 @@ export default function Home() {
       setWindowWidth(window.innerWidth);
       const handleResize = () => setWindowWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
-
-      // Check if the device is an iPhone with Safari
       setIsIphoneSafari(isIphoneWithSafari());
-
-      // Cleanup event listener on component unmount
       return () => window.removeEventListener("resize", handleResize);
     }
-  }, []); // Empty dependency array means this effect runs o
+  }, []); 
 
   return (
     <div>
@@ -49,7 +44,6 @@ export default function Home() {
         innerScale={1}
         outerScale={2}
         outerAlpha={0}
-        // hasBlendMode={true}
         innerStyle={{
           backgroundColor: "white",
         }}
@@ -65,7 +59,7 @@ export default function Home() {
           backgroundColor: "#242424",
           padding:
             windowWidth === undefined
-              ? "200px" // Default padding
+              ? "200px" 
               : windowWidth < 500
               ? "120px"
               : windowWidth < 1000
@@ -77,7 +71,7 @@ export default function Home() {
         <div
           style={{
             background:
-              "linear-gradient(-220deg, rgb(0, 51, 208), rgb(200, 116, 254))",
+              "linear-gradient(-220deg, rgb(0, 51, 208), rgb(200, 116, 254), rgb(255, 198, 41))",
             zIndex: 2,
             width: "100%",
             height: "100%",
@@ -96,10 +90,10 @@ export default function Home() {
           backdropFilter: "blur(130px)",
           WebkitBackdropFilter: "blur(130px)",
           display: "flex",
-          flexDirection: "column", // Change flex direction based on window width
+          flexDirection: "column", 
           justifyContent: "center",
           alignItems: "center",
-          paddingBottom: isIphoneSafari ? "180px" : "0", // Add extra padding if iPhone with Safari
+          paddingBottom: isIphoneSafari ? "180px" : "0", 
         }}
       >
         <div
@@ -136,22 +130,22 @@ export default function Home() {
               color: "white",
               fontSize:
                 windowWidth === undefined
-                  ? "1.5rem" // Default font size if windowWidth is undefined
+                  ? "1.5rem" 
                   : windowWidth < 1000
                   ? "1.25rem"
-                  : "1.5rem", // Adjust font size based on window width
+                  : "1.5rem",
               textAlign: "left",
               marginTop: "50px",
               whiteSpace: "pre-line",
-              paddingLeft: "20px", // Add padding for better alignment
+              paddingLeft: "20px",
               paddingRight: "20px",
               maxWidth: "700px",
               fontWeight: "300",
             }}
           >
-            currently, i’m building at{" "}
+            currently, i’m building{" "}
             <a
-              href="https://collectwise.co"
+              href="https://collectwise.com"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "white", textDecoration: "underline" }}
@@ -170,18 +164,18 @@ export default function Home() {
                   ? "1.5rem"
                   : windowWidth < 1000
                   ? "1.25rem"
-                  : "1.5rem", // Default to 1.5rem if windowWidth is undefined
+                  : "1.5rem", 
               textAlign: "left",
               marginTop: "50px",
               whiteSpace: "pre-line",
-              paddingLeft: "20px", // Add padding for better alignment
+              paddingLeft: "20px", 
               maxWidth: "700px",
               fontWeight: "300",
               paddingRight: "20px",
             }}
           >
             i’m also a student at carnegie mellon university, studying
-            information systems and software engineering
+            information systems and human computer interaction
           </h4>
         </div>
         <div
@@ -189,7 +183,7 @@ export default function Home() {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            gap: "60px", // Add gap between icons
+            gap: "60px", 
             marginTop: "100px",
           }}
         >
