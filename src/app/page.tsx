@@ -2,8 +2,23 @@
 import Head from "next/head";
 import styles from "./page.module.css";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import AnimatedCursor from "react-animated-cursor";
+
+type Position = {
+  x: number;
+  y: number;
+};
+
+const blobStyle = {
+  position: 'absolute',
+  borderRadius: '50%',
+  filter: 'blur(60px)',
+  transition: 'transform 0.3s ease-out',
+  width: '800px',
+  height: '800px',
+  background: 'linear-gradient(-220deg, rgb(0, 51, 208) 0%, rgb(200, 116, 254) 40%, rgb(255, 198, 41) 80%)',
+} as const;
 
 const iconStyle = {
   color: "rgba(255, 255, 255, 0.4)",
@@ -25,6 +40,16 @@ const isIphoneWithSafari = () => {
 export default function Home() {
   const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
   const [isIphoneSafari, setIsIphoneSafari] = useState(false);
+  const [mousePosition, setMousePosition] = useState<Position>({ x: 0, y: 0 });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    setMousePosition({ x: e.pageX, y: e.pageY });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -32,12 +57,25 @@ export default function Home() {
       const handleResize = () => setWindowWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
       setIsIphoneSafari(isIphoneWithSafari());
-      return () => window.removeEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }
   }, []); 
 
+  const calculateBlobTransform = (mouseX: number, mouseY: number, factor: number) => {
+    if (!isMounted) return '';
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    
+    const deltaX = (mouseX - centerX) * factor;
+    const deltaY = (mouseY - centerY) * factor;
+    
+    return `translate(${deltaX}px, ${deltaY}px)`;
+  };
+
   return (
-    <div>
+    <div onPointerMove={handlePointerMove}>
       <AnimatedCursor
         innerSize={8}
         outerSize={35}
@@ -57,26 +95,22 @@ export default function Home() {
           width: "100vw",
           height: "100vh",
           backgroundColor: "#242424",
-          padding:
-            windowWidth === undefined
-              ? "200px" 
-              : windowWidth < 500
-              ? "120px"
-              : windowWidth < 1000
-              ? "180px"
-              : "200px",
+          position: "relative",
+          overflow: "hidden",
+          padding: windowWidth === undefined ? "200px" : windowWidth < 500 ? "120px" : windowWidth < 1000 ? "180px" : "200px",
           zIndex: 1,
         }}
       >
         <div
           style={{
-            background:
-              "linear-gradient(-220deg, rgb(0, 51, 208), rgb(200, 116, 254), rgb(255, 198, 41))",
-            zIndex: 2,
-            width: "100%",
-            height: "100%",
+            ...blobStyle,
+            transform: isMounted ? calculateBlobTransform(mousePosition.x, mousePosition.y, -0.35) : '',
+            left: '50%',
+            top: '50%',
+            marginLeft: '-400px',
+            marginTop: '-400px',
           }}
-        ></div>
+        />
       </div>
       <div
         style={{
@@ -94,6 +128,7 @@ export default function Home() {
           justifyContent: "center",
           alignItems: "center",
           paddingBottom: isIphoneSafari ? "180px" : "0", 
+          pointerEvents: "none",
         }}
       >
         <div
