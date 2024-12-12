@@ -37,6 +37,19 @@ const iconHoverStyle = {
   transform: "scale(1.2)",
 };
 
+const linkStyle = {
+  color: "white",
+  textDecoration: "underline",
+  pointerEvents: "auto" as const,
+  transition: "all 0.3s ease",
+  opacity: 0.8,
+};
+
+const linkHoverStyle = {
+  ...linkStyle,
+  opacity: 1,
+};
+
 const isIphoneWithSafari = () => {
   const ua = navigator.userAgent;
   return (
@@ -193,7 +206,13 @@ export default function Home() {
               href="https://collectwise.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "white", textDecoration: "underline" }}
+              style={linkStyle}
+              onMouseEnter={(e) => {
+                Object.assign(e.currentTarget.style, linkHoverStyle);
+              }}
+              onMouseLeave={(e) => {
+                Object.assign(e.currentTarget.style, linkStyle);
+              }}
             >
               collectwise
             </a>{" "}
