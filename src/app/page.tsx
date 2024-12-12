@@ -209,7 +209,7 @@ export default function Home() {
               paddingRight: "20px",
             }}
           >
-            i’m also a student at carnegie mellon university, studying
+            i also attended carnegie mellon university to study
             information systems and human computer interaction
           </h4>
         </div>
