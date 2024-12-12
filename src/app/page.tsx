@@ -25,6 +25,16 @@ const iconStyle = {
   fontSize: "3.125rem", 
   marginTop: "15px",
   marginBottom: "15px",
+  transition: "all 0.3s ease",
+  cursor: "pointer",
+  pointerEvents: "auto" as const,
+  transform: "scale(1)",
+};
+
+const iconHoverStyle = {
+  ...iconStyle,
+  color: "rgba(255, 255, 255, 0.9)",
+  transform: "scale(1.2)",
 };
 
 const isIphoneWithSafari = () => {
@@ -227,6 +237,12 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             style={iconStyle}
+            onMouseEnter={(e) => {
+              Object.assign(e.currentTarget.style, iconHoverStyle);
+            }}
+            onMouseLeave={(e) => {
+              Object.assign(e.currentTarget.style, iconStyle);
+            }}
           >
             <FaLinkedin />
           </a>
@@ -235,6 +251,12 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             style={iconStyle}
+            onMouseEnter={(e) => {
+              Object.assign(e.currentTarget.style, iconHoverStyle);
+            }}
+            onMouseLeave={(e) => {
+              Object.assign(e.currentTarget.style, iconStyle);
+            }}
           >
             <FaGithub />
           </a>
@@ -243,6 +265,12 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             style={iconStyle}
+            onMouseEnter={(e) => {
+              Object.assign(e.currentTarget.style, iconHoverStyle);
+            }}
+            onMouseLeave={(e) => {
+              Object.assign(e.currentTarget.style, iconStyle);
+            }}
           >
             <FaInstagram />
           </a>
