@@ -230,7 +230,7 @@ export default function Home() {
             >
               valuemate
             </a>{" "}
-            (yc x25), where we use AI to automate real estate appraisals 
+            (yc x25), where we use ai to automate real estate appraisals 
             {/* making recovery faster, cheaper, and more effective. */}
           </motion.h4>
           <motion.h4
