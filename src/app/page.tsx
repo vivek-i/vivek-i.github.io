@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 import { useState, useEffect, useCallback } from "react";
 import AnimatedCursor from "react-animated-cursor";
+import ScrambleHover from "../components/ui/scramble-hover";
+import { motion } from "motion/react";
 
 type Position = {
   x: number;
@@ -168,7 +170,10 @@ export default function Home() {
             marginTop: "100px",
           }}
         >
-          <h1
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             style={{
               fontFamily: "Manrope",
               color: "white",
@@ -180,9 +185,18 @@ export default function Home() {
               paddingRight: "20px",
             }}
           >
-            hi, i'm vivek
-          </h1>
-          <h4
+            <ScrambleHover
+              text="hi, i'm vivek"
+              scrambleSpeed={30}
+              maxIterations={10}
+              useOriginalCharsOnly={true}
+              style={{ cursor: "pointer", pointerEvents: "auto" }}
+            />
+          </motion.h1>
+          <motion.h4
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             style={{
               fontFamily: "'Manrope', sans-serif",
               color: "white",
@@ -201,7 +215,47 @@ export default function Home() {
               fontWeight: "300",
             }}
           >
-            currently, i’m building{" "}
+            currently, i'm building{" "}
+            <a
+              href="https://valuemate.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={linkStyle}
+              onMouseEnter={(e) => {
+                Object.assign(e.currentTarget.style, linkHoverStyle);
+              }}
+              onMouseLeave={(e) => {
+                Object.assign(e.currentTarget.style, linkStyle);
+              }}
+            >
+              valuemate
+            </a>{" "}
+            (yc x25), where we use AI to automate real estate appraisals 
+            {/* making recovery faster, cheaper, and more effective. */}
+          </motion.h4>
+          <motion.h4
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
+            style={{
+              fontFamily: "'Manrope', sans-serif",
+              color: "white",
+              fontSize:
+                windowWidth === undefined
+                  ? "1.5rem" 
+                  : windowWidth < 1000
+                  ? "1.25rem"
+                  : "1.5rem",
+              textAlign: "left",
+              marginTop: "50px",
+              whiteSpace: "pre-line",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+              maxWidth: "700px",
+              fontWeight: "300",
+            }}
+          >
+            previously, i built ai agents for debt collection at {" "}
             <a
               href="https://collectwise.com"
               target="_blank"
@@ -216,10 +270,13 @@ export default function Home() {
             >
               collectwise
             </a>{" "}
-            (yc f24), where we use AI to automate debt collections 
+            (yc f24)
             {/* making recovery faster, cheaper, and more effective. */}
-          </h4>
-          <h4
+          </motion.h4>
+          <motion.h4
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
             style={{
               fontFamily: "'Manrope', sans-serif",
               color: "white",
@@ -239,10 +296,13 @@ export default function Home() {
             }}
           >
             i also attended carnegie mellon university to study
-            information systems and human computer interaction
-          </h4>
+            information systems and human computer interaction 
+          </motion.h4>
         </div>
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
           style={{
             display: "flex",
             flexDirection: "row",
@@ -293,7 +353,7 @@ export default function Home() {
           >
             <FaInstagram />
           </a>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
