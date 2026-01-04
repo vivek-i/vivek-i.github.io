@@ -71,7 +71,7 @@ export default function Home() {
   const [isIphoneSafari, setIsIphoneSafari] = useState(false);
   const [mousePosition, setMousePosition] = useState<Position>({ x: 0, y: 0 });
   const [isMounted, setIsMounted] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   
   // Blob positions with velocity for floating effect
   const [blob1Pos, setBlob1Pos] = useState({ x: 0, y: 0 });
@@ -367,7 +367,10 @@ export default function Home() {
           flexDirection: "column", 
           justifyContent: "center",
           alignItems: "center",
-          paddingBottom: isIphoneSafari ? "180px" : "0",
+          paddingTop: "max(0px, env(safe-area-inset-top))",
+          paddingBottom: "max(40px, env(safe-area-inset-bottom))",
+          paddingLeft: "env(safe-area-inset-left)",
+          paddingRight: "env(safe-area-inset-right)",
           overflowY: "auto",
           overflowX: "hidden",
           pointerEvents: "none",
@@ -383,7 +386,7 @@ export default function Home() {
             alignItems: windowWidth && windowWidth > 900 ? "flex-start" : "flex-start",
             maxWidth: "1200px",
             width: "100%",
-            padding: windowWidth === undefined ? "40px" : windowWidth < 600 ? "24px 20px" : windowWidth < 900 ? "32px 28px" : "60px 40px",
+            padding: windowWidth === undefined ? "40px" : windowWidth < 600 ? "24px 20px 60px 20px" : windowWidth < 900 ? "32px 28px 60px 28px" : "60px 40px",
             gap: windowWidth && windowWidth > 900 ? "100px" : "40px",
           }}
         >
@@ -622,7 +625,7 @@ export default function Home() {
                 >
                   collectwise
                 </a>{" "}
-                (yc f24).
+                (yc f24). scaled to 7 figure run rate in under a year.
               </p>
             </div>
 
